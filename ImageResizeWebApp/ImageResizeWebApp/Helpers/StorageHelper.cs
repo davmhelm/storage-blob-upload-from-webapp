@@ -32,7 +32,7 @@ namespace ImageResizeWebApp.Helpers
             // Create a URI to the blob
             Uri blobUri = new Uri("https://" +
                                   _storageConfig.AccountName +
-                                  ".blob.core.windows.net/" +
+                                  ".blob.core.usgovcloudapi.net/" +
                                   _storageConfig.ImageContainer +
                                   "/" + fileName);
 
@@ -55,7 +55,7 @@ namespace ImageResizeWebApp.Helpers
             List<string> thumbnailUrls = new List<string>();
 
             // Create a URI to the storage account
-            Uri accountUri = new Uri("https://" + _storageConfig.AccountName + ".blob.core.windows.net/");
+            Uri accountUri = new Uri("https://" + _storageConfig.AccountName + ".blob.core.usgovcloudapi.net/");
 
             // Create BlobServiceClient from the account URI
             BlobServiceClient blobServiceClient = new BlobServiceClient(accountUri);
