@@ -33,7 +33,7 @@ namespace ImageResizeWebApp.Helpers
             // Create a URI to the blob
             Uri blobUri = new Uri("https://" +
                                   _storageConfig.AccountName +
-                                  ".blob.core.windows.net/" +
+                                  ".blob.core.usgovcloudapi.net/" +
                                   _storageConfig.ImageContainer +
                                   "/" + fileName);
 
@@ -56,7 +56,7 @@ namespace ImageResizeWebApp.Helpers
             List<string> thumbnailUrls = new List<string>();
 
             // Create a URI to the storage account
-            Uri accountUri = new Uri("https://" + _storageConfig.AccountName + ".blob.core.windows.net/");
+            Uri accountUri = new Uri("https://" + _storageConfig.ThumbnailAccountName + ".blob.core.usgovcloudapi.net/");
 
             // Create BlobServiceClient from the account URI
             BlobServiceClient blobServiceClient = new BlobServiceClient(accountUri);
@@ -82,12 +82,12 @@ namespace ImageResizeWebApp.Helpers
 
                 // Create StorageSharedKeyCredentials object by reading
                 // the values from the configuration (appsettings.json)
-                StorageSharedKeyCredential storageCredential =
-                    new StorageSharedKeyCredential(_storageConfig.AccountName, _storageConfig.AccountKey);
+                StorageSharedKeyCredential thumbnailStorageCredential =
+                    new StorageSharedKeyCredential(_storageConfig.ThumbnailAccountName, _storageConfig.ThumbnailAccountKey);
 
                 // Create a SAS URI to the storage account
                 UriBuilder sasUri = new UriBuilder(accountUri);
-                sasUri.Query = sas.ToSasQueryParameters(storageCredential).ToString();
+                sasUri.Query = sas.ToSasQueryParameters(thumbnailStorageCredential).ToString();
 
                 foreach (BlobItem blob in container.GetBlobs())
                 {
